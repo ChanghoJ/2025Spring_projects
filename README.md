@@ -2,6 +2,7 @@ Hypothesis: Shifting Geography of Patent Filings in the United States
 Original AIPD Dataset - https://www.uspto.gov/ip-policy/economic-research/research-datasets/artificial-intelligence-patent-dataset
 Secondary Datasets link - https://patentsview.org/download/data-download-tables
 Dataset dictionary link - https://patentsview.org/download/data-download-dictionary 
+
 Context:
 The geographic distribution of US patent filings reflects broader economic & technological shifts. This hypothesis explores how two major events — the COVID-19 pandemic and the ongoing decentralization of tech innovation — have impacted patent location trends in the US (We plan to use only the patents granted datasets for all the following criterias)
 1. Post-COVID Spatial Dispersion of Innovation
