@@ -173,3 +173,13 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Ignore datasets under data file except Colleges_and_Universities_-3122497483864735259.csv
+g_location_disambiguated.tsv
+g_inventor_disambiguated.tsv
+g_attorney_disambiguated.tsv
+g_assignee_disambiguated.tsv
+g_application.tsv
+ai_model_predictions.csv.zip
+ai_model_predictions.csv
+2025-Public-Data-File.xlsx
