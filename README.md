@@ -42,3 +42,32 @@ To minimize transfer size and optimize storage, all .csv and .tsv datasets were 
 - Files are only downloaded if not already present to prevent redundant downloads.
 - Unzip all .zip files:
 Each ZIP file is programmatically checked and extracted into the same data directory.
+
+## Hypothesis 1: Post-COVID Spatial Dispersion of Innovation
+### We hypothesize that the geographic distribution of U.S. patent filings became more dispersed after the COVID-19 pandemic (2020–2021), due to the rise of remote work and decentralization of tech innovation. We expected a visible shift from traditional urban tech hubs to a broader range of locations, including rural and non-coastal states.
+
+### Datasets Used:
+- ai_model_predictions.csv
+- g_inventor_disambiguated.tsv
+- g_location_disambiguated.tsv
+- g_application.tsv
+
+### Data Import & Filtering
+The notebook:
+- Loaded all data into Pandas DataFrames.
+- Filtered only granted patents (flag_patent == 1).
+- Parsed publication dates into year format for temporal analysis.
+
+### Key Analyses & Visualizations
+- 1. Interactive Yearly Patent Visualization (Bubble Map)
+    - A slider-based choropleth visualizes patent filing density across states from 1976–2023.
+    - Users can hover over states to view exact patent counts.
+    - Bubble size and color dynamically scale with volume.
+- 2. State-Level Patent Share & Growth Analysis
+    - Calculates what share of patents came from the top 5 states each year.
+    - Compares average patent counts before and after COVID (2018–2019 vs. 2021–2023).
+***Output: Identifies states with the most significant changes in patent filings.***
+- 3. States Above Average Patent Activity (2018–2023)
+    - Gets the average patent count per state each year.
+    - Counts how many states exceeded the national average each year.
+***Resulting Plot: Shows whether innovation became more evenly distributed or remained concentrated in fewer regions.***
