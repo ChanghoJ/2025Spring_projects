@@ -101,7 +101,7 @@ The notebook:
 3. Yearly Filing Trends
   - Tracks yearly patent filing volume for the top 5 attorneys from 1976 to 2023.
   - Visualizes trends to highlight growth, decline, or consistency in legal representation across time.
-4. 🗺️ Choropleth Maps
+4. Choropleth Maps
 - Compares patent filings with vs. without attorney involvement across U.S. states.
 - Maps are created using Plotly Express, showing:
   - States with high volumes of attorney-filed patents.
