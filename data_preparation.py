@@ -2,7 +2,7 @@
 IS 597PR Final Project: Data preparation for ai_model_predictions.csv.zip file  
 Name: Changho Jung, Prisha Singhania
 
-The following code is referred from ChatGPT and Changho's previous project of IS477 under CC0-1.0 license: https://github.com/ChanghoJ/is477-fall2023-final-project/blob/main/scripts/prepare_data.py.
+The following code is referred from ChatGPT.  
 The purpose of the code is:  
 1. Download ai_model_predictions.csv.zip  
 2. Download all secondary datasets:  
@@ -11,6 +11,7 @@ The purpose of the code is:
    - g_assignee_disambiguated.tsv  
    - g_attorney_disambiguated.tsv  
    - 2025-Public-Data-File.xlsx  
+3. Unzip all ZIP files
 '''
 
 from selenium import webdriver
@@ -46,13 +47,13 @@ time.sleep(40)
 driver.quit()
 print("ai_model_predictions.csv.zip download complete.")
 
-# Dictionary of secondary datasets
+# Dictionary of secondary datasets (including ZIP and Excel files)
 dict_patent = {
-    "data/g_application.tsv": "https://s3.amazonaws.com/data.patentsview.org/download/g_application.tsv.zip",
-    "data/g_attorney_disambiguated.tsv": "https://s3.amazonaws.com/data.patentsview.org/download/g_attorney_disambiguated.tsv.zip",
-    "data/g_assignee_disambiguated.tsv": "https://s3.amazonaws.com/data.patentsview.org/download/g_assignee_disambiguated.tsv.zip",
-    "data/g_location_disambiguated.tsv": "https://s3.amazonaws.com/data.patentsview.org/download/g_location_disambiguated.tsv.zip",
-    "data/g_inventor_disambiguated.tsv": "https://s3.amazonaws.com/data.patentsview.org/download/g_inventor_disambiguated.tsv.zip",
+    "data/g_application.tsv.zip": "https://s3.amazonaws.com/data.patentsview.org/download/g_application.tsv.zip",
+    "data/g_attorney_disambiguated.tsv.zip": "https://s3.amazonaws.com/data.patentsview.org/download/g_attorney_disambiguated.tsv.zip",
+    "data/g_assignee_disambiguated.tsv.zip": "https://s3.amazonaws.com/data.patentsview.org/download/g_assignee_disambiguated.tsv.zip",
+    "data/g_location_disambiguated.tsv.zip": "https://s3.amazonaws.com/data.patentsview.org/download/g_location_disambiguated.tsv.zip",
+    "data/g_inventor_disambiguated.tsv.zip": "https://s3.amazonaws.com/data.patentsview.org/download/g_inventor_disambiguated.tsv.zip",
     "data/2025-Public-Data-File.xlsx": "https://carnegieclassifications.acenet.edu/wp-content/uploads/2025/04/2025-Public-Data-File.xlsx"
 }
 
@@ -69,15 +70,24 @@ for file_path, file_url in dict_patent.items():
     else:
         print(f"Already exists: {file_path}")
 
-zip_path = os.path.join(download_dir, "ai_model_predictions.csv.zip")
-extract_to = download_dir  # or set another path if you want
+# Function to unzip a file if it is a valid .zip file
+def unzip_file(zip_filepath, extract_dir):
+    if zipfile.is_zipfile(zip_filepath):
+        try:
+            with zipfile.ZipFile(zip_filepath, 'r') as archive:
+                archive.extractall(path=extract_dir)
+                print(f"Unzipped: {zip_filepath}")
+        except Exception as e:
+            print(f"Unzip failed for {zip_filepath}: {e}")
+    else:
+        print(f"Not a valid ZIP file: {zip_filepath}")
 
-if os.path.exists(zip_path):
-    try:
-        with zipfile.ZipFile(zip_path, mode="r") as archive:
-            archive.extractall(path=extract_to)
-            print("Unzip of ai_model_predictions.csv.zip complete.")
-    except Exception as e:
-        print(f"Unzip failed: {e}")
-else:
-    print("Zip file not found. Please check the download path.")
+# Unzip ai_model_predictions.csv.zip
+ai_zip_path = os.path.join(download_dir, "ai_model_predictions.csv.zip")
+unzip_file(ai_zip_path, download_dir)
+
+# Unzip all other ZIP files in the data folder
+for filename in os.listdir(download_dir):
+    filepath = os.path.join(download_dir, filename)
+    if filename.endswith(".zip"):
+        unzip_file(filepath, download_dir)
