@@ -72,6 +72,45 @@ The notebook:
     - Counts how many states exceeded the national average each year.
 ***Resulting Plot: Shows whether innovation became more evenly distributed or remained concentrated in fewer regions.***
 
+## Hypothesis 2: Proximity to Research Institutions and Patent Density
+### We expect that counties with prominent research universities (e.g., Stanford, MIT, UIUC) consistently see higher patent activity. This hypothesis explores whether proximity to academic research hubs correlates with innovation output.
+- From feedback, we heard it would be great to make function on distance caculation, but hypothesis 2 is more about gathered around counties rather than distance.
+
+### Datasets Used:
+- g_location_disambiguated.tsv
+- g_inventor_disambiguated.tsv
+- Colleges_and_Universities_-3122497483864735259.csv
+- 2025-Public-Data-File.xlsx
+
+### Data Import & Filtering
+The notebook:
+- Loaded all data into Pandas DataFrames.
+- Merged with necessary dataframes (e.g. latitude and longitude in one dataframe to the other).
+- Filter out patent location by == 'US'.
+- Dropped na value from columns will use
+
+### Key Analyses & Visualizations
+- 1. Scatter map
+    - This is visualization that blue dots are individual inventors with patents, whereas red starts are very high spending research universities on a U.S. territory map.
+    - loc_sample_df, the subsampled version of dataset used for performance issue.
+    - Got an assistence from ChatGPT for the plot
+- 2. County density map
+    - This is a density heatmap based on number of patent application by inventors with red starts as universities
+    - Helped from ChatGPT, for the visualization part
+- 3. Summary statistics
+    - Calculated summary statistics for counties' patent application amount with university vs. without university
+    - Helped from ChatGPT
+
+### Summary of Results
+- In **scatter map**,
+- In a brief sense, it looks like patent applicants (inventors) likely gathered around area nearby research universities.
+- Still not clear enough to makes the conclusion, so proceed to the next visualization
+- According to **density map**, it is hard to compare counties with and without the universities
+- The **summary statistic** results show that high mean, but unreliable due to huge gap between min and max patent application amount.
+- So, by checking minimum, median, maximum, we can conclude counties with universities have more patent applicants
+- This is comparable result as counties with universities are small (153 vs 3022) but showed higher minimum, median, and maximum patent applicants.
+- Therefore, the hypothesis 2, counties with prominent research universities (e.g., Stanford, MIT, UIUC) consistently see higher patent activity, is likely right according to minimum, median, and maximum amount of patent applicants are more around universities.
+
 ## Hypothesis 3: Attorney Involvement & Technologically Advanced States
 ### We hypothesize that patents involving attorney organizations are more likely to be filed from technologically advanced states, while those without attorney involvement may originate from a broader geographic base, including emerging innovation regions. This hypothesis explores how legal representation in patent filings might correlate with technological, and geographic factors.
 
@@ -113,3 +152,66 @@ The notebook:
 - Non-attorney filings are significantly more geographically dispersed, suggesting independent innovation in less represented regions.
 - The gap between attorney-heavy and attorney-light states has remained consistent.
 
+## Hypothesis 4: Assignee Type and Concentration
+### We hypothesize that patents assigned to organizations (companies, universities, government) show a more concentrated geographic footprint compared to patents with individual or no clear assignee.
+- Specifically, we expect corporate-assigned patents to cluster around business hubs (e.g. California and New York), while individually filed patents may appear more dispersed.
+- We checked this by comparing patent amount of individual vs. company by county level
+- Prepared 3 visualizations and 1 statistical test
+- From feedback, it would be great to see statistics to compare how assignee spreaded compared, so prepared additional statistics.
+
+### Datasets Used:
+- g_application.tsv
+- g_assignee_disambiguated.tsv
+- g_location_disambiguated.tsv
+- 2020_UA_COUNTY.xlsx
+
+### Data Import & Filtering
+The notebook:
+- Loaded all data into Pandas DataFrames.
+- Merged with necessary dataframes (e.g. latitude and longitude in one dataframe to the other).
+- Filter out patent location by == 'US'.
+- Dropped na value from columns will use
+
+### Key Analyses & Visualizations
+- 1. Scatter map
+    - This visualization shows data points on map by whether patent assignee is individual, government, or company in U.S.
+    - Just like in the hypothesis 2, the map used subsampled version for performance issue.
+    - Dataset subsetted by around 1/20 due to large sample size (n>10M)
+    - Got an assistence from ChatGPT for the plot
+- 2. County density map
+    - This is the visualization by counties by density of patent application 
+    - First visualization shows 3 heatmaps by 'individual', 'company', 'government', how are they concentrate in counties 
+    - Second visualization shows map that colored with dominant patent application amount by 'individual', 'company', 'government'. Subset company samples by 50000, similar amount with individuals to check dominance over counties in same size of patent application. 
+    - Third is similar with the second but used full dataset that company not subsampled with 50000. 
+    - Got an assistence from ChatGPT for the plot
+- 3. Bar plot
+    - As previous visualizations were lack of explain in the main hypothesis: so assignee from company are more focused in area and individuals more spreaded?
+    - We try to show this by state-wise (since county is too many to visualize in bar plot)
+    - Prepared 2 bar plots,
+    - one for stacked bar plot to see overall amount with concentration on patent application by assginee
+    - another for interactive bar plot that user can choose assignee type from drop down menu, can individually check 'individual', 'company', and 'government' patent application density by states.
+    - Got an assistence from ChatGPT for the plot
+- 4. Summary statistics
+    - Still one final question remained, does companies more clustered around busniess hub and individuals are more spreaded?
+    - We compared statistics by comparing amount of patent application by counties, Company assignee in urban vs. rural and Individual assignee in urban vs. rural.
+    - Then applied Mann–Whitney U Test to check each assignee's patent application in urban and rural counties are different, which if both companies and individuals shown to be different, then the hypothesis likely wrong because they are both distribution are different in counties.
+
+### Summary of Results
+- According to the Mann–Whitney U Test, the distributions are significantly different (p-value < 0.05) for company and individual assignees
+- we can conclude that the distribution of patent density for companies is significantly different between urban and rural counties.
+- Overall, according to the bar plots and Mann–Whitney U Test, individual also concentrated in urban counties, which "hypothesis 4: We hypothesize that patents assigned to organizations (companies, universities, government) show a more concentrated geographic footprint compared to patents with individual or no clear assignee. Specifically, we expect corporate-assigned patents to cluster around business hubs (e.g. California and New York), while individually filed patents may appear more dispersed." is likely not right.
+
+## Brief Dataset description and sources
+- AI patent applications dataset, "ai_model_predictions.csv.zip":"https://data.uspto.gov/ui/datasets/products/files/ECOPATAI/2023/ai_model_predictions.csv.zip"
+- Patent application dataset, "g_application.tsv":"https://s3.amazonaws.com/data.patentsview.org/download/g_application.tsv.zip"
+- Attorney who decided patent dataset, "g_attorney_disambiguated.tsv":"https://s3.amazonaws.com/data.patentsview.org/download/g_attorney_disambiguated.tsv.zip",
+- Patent applicant assignee (individual, corporation, government) dataset, "g_assignee_disambiguated.tsv":"https://s3.amazonaws.com/data.patentsview.org/download/g_assignee_disambiguated.tsv.zip"
+- Patent application location dataset, "g_location_disambiguated.tsv":"https://s3.amazonaws.com/data.patentsview.org/download/g_location_disambiguated.tsv.zip"
+- Patent inventor dataset, "g_inventor_disambiguated.tsv":"https://s3.amazonaws.com/data.patentsview.org/download/g_inventor_disambiguated.tsv.zip"
+- List of universities with location information, "Colleges_and_Universities_-3122497483864735259.csv":"https://hifld-geoplatform.hub.arcgis.com/datasets/geoplatform::colleges-and-universities/about"
+- List universities with research spending filter, "2025-Public-Data-File.xlsx":"https://carnegieclassifications.acenet.edu/wp-content/uploads/2025/04/2025-Public-Data-File.xlsx"
+- Urban information filter on counties, "data/2020_UA_COUNTY.xlsx":"https://www2.census.gov/geo/docs/reference/ua/2020_UA_COUNTY.xlsx"
+
+## AI usage
+- Visualizations and statistical analysis codes for the hypothesis 2 and 4 are created by the assistance of ChatGPT
+- Scatter map, density map, and bar plot in hypothesis 2 and 4
