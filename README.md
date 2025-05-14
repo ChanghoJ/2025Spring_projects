@@ -39,6 +39,6 @@ To minimize transfer size and optimize storage, all .csv and .tsv datasets were 
   4. g_location_disambiguated.tsv.zip
   5. g_inventor_disambiguated.tsv.zip
   6. 2025-Public-Data-File.xlsx (Excel format, not zipped)
-Files are only downloaded if not already present to prevent redundant downloads.
+- Files are only downloaded if not already present to prevent redundant downloads.
 - Unzip all .zip files:
 Each ZIP file is programmatically checked and extracted into the same data directory.
