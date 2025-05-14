@@ -211,7 +211,3 @@ The notebook:
 - List of universities with location information, "Colleges_and_Universities_-3122497483864735259.csv":"https://hifld-geoplatform.hub.arcgis.com/datasets/geoplatform::colleges-and-universities/about"
 - List universities with research spending filter, "2025-Public-Data-File.xlsx":"https://carnegieclassifications.acenet.edu/wp-content/uploads/2025/04/2025-Public-Data-File.xlsx"
 - Urban information filter on counties, "data/2020_UA_COUNTY.xlsx":"https://www2.census.gov/geo/docs/reference/ua/2020_UA_COUNTY.xlsx"
-
-## AI usage
-- Visualizations and statistical analysis codes for the hypothesis 2 and 4 are created by the assistance of ChatGPT
-- Scatter map, density map, and bar plot in hypothesis 2 and 4
