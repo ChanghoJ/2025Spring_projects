@@ -12,7 +12,7 @@ Datasets: g_location_disambiguated, g_inventor_disambiguated, g_application
 We expect that counties with prominent research universities (e.g., Stanford, MIT, UIUC) consistently see higher patent activity. This hypothesis explores whether proximity to academic research hubs correlates with innovation output.
 Datasets: g_location_disambiguated, external list of U.S. research universities
 - 3. Attorney Involvement and Urban Proximity
-We hypothesize that patents filed with attorney organizations involvement are more likely to originate from urban counties or tech-centric states. In contrast, patents without attorney organization involvement may show more geographic spread or rural origin.
+We hypothesize that patents filed with attorney organizations involvement are more likely to originate from urban counties or tech-centric states. In contrast, patents without attorney organization involvement may show more geographic spread.
 Datasets: g_attorney_disambiguated, g_location_disambiguated, g_application
 - 4. Assignee Type and Geographic Concentration
 We hypothesize that patents assigned to organizations (companies, universities, government) show a more concentrated geographic footprint compared to patents with individual or no clear assignee. Specifically, we expect corporate-assigned patents to cluster around business hubs (California and New York), while individually filed patents may appear more dispersed.
