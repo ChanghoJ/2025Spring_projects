@@ -42,6 +42,12 @@ To minimize transfer size and optimize storage, all .csv and .tsv datasets were 
 - Files are only downloaded if not already present to prevent redundant downloads.
 - Unzip all .zip files:
 Each ZIP file is programmatically checked and extracted into the same data directory.
+### About already existing dataset
+- Colleges_and_Universities_-3122497483864735259.csv already in the data file due to link issue.
+- Still, according to the license, no limitation on usage
+- https://hifld-geoplatform.hub.arcgis.com/datasets/geoplatform::colleges-and-universities/about
+- Limitations of use: None (Public Use). Users are advised to read the dataset's metadata thoroughly to understand appropriate use and data limitations
+- Limitations of use: Distributor assumes no liability for misuse of data.
 
 ## Hypothesis 1: Post-COVID Spatial Dispersion of Innovation
 ### We hypothesize that the geographic distribution of U.S. patent filings became more dispersed after the COVID-19 pandemic (2020–2021), due to the rise of remote work and decentralization of tech innovation. We expected a visible shift from traditional urban tech hubs to a broader range of locations, including rural and non-coastal states.
