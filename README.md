@@ -17,3 +17,25 @@ Datasets: g_attorney_disambiguated, g_location_disambiguated, g_application
 - 4. Assignee Type and Geographic Concentration
 We hypothesize that patents assigned to organizations (companies, universities, government) show a more concentrated geographic footprint compared to patents with individual or no clear assignee. Specifically, we expect corporate-assigned patents to cluster around business hubs (California and New York), while individually filed patents may appear more dispersed.
 Datasets: g_assignee_disambiguated, g_location_disambiguated, g_application
+
+***Data Preparation Steps***
+
+Due to the large size of the datasets involved, we used automated downloading and extraction to efficiently prepare the data for analysis. The following steps were implemented in data_preparation.py:
+Create a data directory:
+A ./data folder is created to organize all downloaded and extracted files.
+Download ai_model_predictions.csv.zip:
+This file is hosted on the USPTO website, which restricts direct file downloads. To bypass this, we used a headless Chrome browser with Selenium to automate the download.
+Download all secondary datasets (in .zip format):
+To minimize transfer size and optimize storage, all .csv and .tsv datasets were downloaded as compressed .zip files from reliable sources such as PatentsView and Carnegie Classifications.
+The files include:
+g_application.tsv.zip
+g_attorney_disambiguated.tsv.zip
+g_assignee_disambiguated.tsv.zip
+g_location_disambiguated.tsv.zip
+g_inventor_disambiguated.tsv.zip
+2025-Public-Data-File.xlsx (Excel format, not zipped)
+Files are only downloaded if not already present to prevent redundant downloads.
+Unzip all .zip files:
+Each ZIP file is programmatically checked and extracted into the same data directory. This includes:
+The AI model predictions CSV file
+All .tsv files related to assignee, inventor, application, location, and attorney disambiguation
