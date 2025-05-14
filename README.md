@@ -71,3 +71,45 @@ The notebook:
     - Gets the average patent count per state each year.
     - Counts how many states exceeded the national average each year.
 ***Resulting Plot: Shows whether innovation became more evenly distributed or remained concentrated in fewer regions.***
+
+## Hypothesis 3: Attorney Involvement & Technologically Advanced States
+### We hypothesize that patents involving attorney organizations are more likely to be filed from technologically advanced states, while those without attorney involvement may originate from a broader geographic base, including emerging innovation regions. This hypothesis explores how legal representation in patent filings might correlate with technological, and geographic factors.
+
+### Datasets Used:
+- ai_model_predictions.csv
+- g_inventor_disambiguated.tsv
+- g_location_disambiguated.tsv
+- g_application.tsv
+- g_attorney_disambiguated.tsv
+
+### Data Loading & Preparation
+- The notebook:
+    - Imports all relevant data into Pandas DataFrames.
+    - Filters and merges data on patent ID to correlate attorney involvement with filing location and inventor data.
+  - Creates subsets of data:
+    - df_attorney: patents with attorney involvement.
+    - df_no_attorney: patents without attorney involvement.
+   
+### Key Analyses & Visualizations
+1. Top 5 Attorney Organizations
+  - Filters out records with no attorney information.
+  - Uses value_counts() to find the most frequently occurring patent attorney organizations globally.
+  - Displays the top 5 by total patent count.
+2. State-Wise Distribution of Top 5 Attorneys
+  - Analyzes where the top attorney organizations primarily file patents within the U.S.
+  - Visualizes their geographic influence and concentration using grouped bar charts and heatmaps.
+3. Yearly Filing Trends
+  - Tracks yearly patent filing volume for the top 5 attorneys from 1976 to 2023.
+  - Visualizes trends to highlight growth, decline, or consistency in legal representation across time.
+4. 🗺️ Choropleth Maps
+- Compares patent filings with vs. without attorney involvement across U.S. states.
+- Maps are created using Plotly Express, showing:
+  - States with high volumes of attorney-filed patents.
+  - States with large numbers of patents without attorney involvement.
+
+### Summary of Results
+
+- Attorney involvement is highly concentrated in states like California, New York, and Massachusetts, reinforcing their roles as traditional tech hubs.
+- Non-attorney filings are significantly more geographically dispersed, suggesting independent innovation in less represented regions.
+- The gap between attorney-heavy and attorney-light states has remained consistent.
+
